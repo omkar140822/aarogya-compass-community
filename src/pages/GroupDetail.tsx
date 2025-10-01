@@ -46,7 +46,7 @@ const GroupDetail = () => {
       .select()
       .eq("group_id", id)
       .eq("user_id", user.id)
-      .single();
+      .maybeSingle();
 
     setIsMember(!!data);
   };
@@ -76,7 +76,12 @@ const GroupDetail = () => {
       .eq("group_id", id)
       .order("created_at", { ascending: false });
 
-    if (!error) setPosts(data || []);
+    if (error) {
+      console.error("Error fetching posts:", error);
+      toast({ title: "Error loading posts", description: error.message, variant: "destructive" });
+    } else {
+      setPosts(data || []);
+    }
   };
 
   const fetchMessages = async () => {
@@ -86,7 +91,12 @@ const GroupDetail = () => {
       .eq("group_id", id)
       .order("created_at", { ascending: true });
 
-    if (!error) setMessages(data || []);
+    if (error) {
+      console.error("Error fetching messages:", error);
+      toast({ title: "Error loading messages", description: error.message, variant: "destructive" });
+    } else {
+      setMessages(data || []);
+    }
   };
 
   const uploadFile = async (file: File, bucket: string) => {
@@ -132,6 +142,7 @@ const GroupDetail = () => {
 
       setPostContent("");
       setSelectedFiles([]);
+      fetchPosts();
       toast({ title: "Post created!" });
     } catch (error: any) {
       toast({ title: "Error creating post", description: error.message, variant: "destructive" });
@@ -149,7 +160,10 @@ const GroupDetail = () => {
       content: messageContent,
     });
 
-    if (!error) setMessageContent("");
+    if (!error) {
+      setMessageContent("");
+      fetchMessages();
+    }
   };
 
   const toggleLike = async (postId: string, isLiked: boolean) => {
