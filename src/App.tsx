@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import Landing from "./pages/Landing";
 import Questions from "./pages/Questions";
+import Groups from "./pages/Groups";
+import GroupDetail from "./pages/GroupDetail";
 import Auth from "./pages/Auth";
 import AskQuestion from "./pages/AskQuestion";
 import QuestionDetail from "./pages/QuestionDetail";
@@ -24,6 +26,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/questions" element={<Questions />} />
+            <Route path="/groups" element={<Groups />} />
+            <Route path="/groups/:id" element={<GroupDetail />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/ask" element={<AskQuestion />} />
             <Route path="/question/:id" element={<QuestionDetail />} />

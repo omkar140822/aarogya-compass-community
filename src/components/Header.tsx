@@ -19,6 +19,9 @@ const Header = () => {
             <Link to="/questions">
               <Button variant="ghost" size="sm">Questions</Button>
             </Link>
+            <Link to="/groups">
+              <Button variant="ghost" size="sm">Groups</Button>
+            </Link>
             {user ? (
               <>
                 <Link to="/ask">
