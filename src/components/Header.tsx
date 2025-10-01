@@ -16,6 +16,9 @@ const Header = () => {
           </Link>
 
           <nav className="flex items-center gap-4">
+            <Link to="/questions">
+              <Button variant="ghost" size="sm">Questions</Button>
+            </Link>
             {user ? (
               <>
                 <Link to="/ask">
